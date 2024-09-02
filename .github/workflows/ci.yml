@@ -3,7 +3,7 @@ on: [push, pull_request]
 env:
   HUSKY: 0
 jobs:
-  test:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,4 +14,15 @@ jobs:
       - run: bun run tsc:ci
       - run: bun run fmt:ci
       - run: bun run lint:ci
+  bun_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['1.1.26', '1.1.25', '1.1.24', '1.1.23']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ matrix.version }}
+      - run: bun install --frozen-lockfile
       - run: bun run test
