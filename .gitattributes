@@ -1,0 +1,5 @@
+# Line ending behavior
+* text=auto eol=lf
+
+# Bun lockfile
+*.lockb binary diff=lockb

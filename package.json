@@ -1,0 +1,66 @@
+{
+  "name": "@moonjellydigital/utils",
+  "description": "utilites",
+  "version": "0.1.0-dev",
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "author": "Camille Spain <camille@camillespain.com>",
+  "license": "MIT",
+  "keywords": [
+    "utils",
+    "utilites"
+  ],
+  "homepage": "https://github.com/moonjellydigital/utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonjellydigital/utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moonjellydigital/utils/issues"
+  },
+  "files": [
+    "./dist/**/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "prepare": "husky",
+    "check-exports": "bunx attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "build": "rm -rf ./dist && bunx tsc --build tsconfig.build.json",
+    "tsc:ci": "bunx tsc",
+    "fmt:ci": "bunx prettier --check .",
+    "lint:ci": "bunx eslint ."
+  },
+  "lint-staged": {
+    "*.{json,yml,yaml,md}": "prettier --write",
+    "*.{ts,js}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "prettier": "@moonjellydigital/prettier-config",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.4",
+    "@eslint/js": "^9.9.1",
+    "@moonjellydigital/prettier-config": "^1.0.0",
+    "@types/bun": "^1.1.7",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/eslint__js": "^8.42.3",
+    "@types/prettier": "^3.0.0",
+    "@vitest/coverage-v8": "^2.0.5",
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsdoc": "^50.2.2",
+    "globals": "^15.9.0",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.2.0",
+    "vitest": "^2.0.5"
+  }
+}
