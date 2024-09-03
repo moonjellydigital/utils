@@ -19,6 +19,7 @@ jobs:
     strategy:
       matrix:
         version: ['1.1.26', '1.1.25', '1.1.24', '1.1.23']
+    name: Bun ${{ matrix.version }} tests
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -26,3 +27,20 @@ jobs:
           bun-version: ${{ matrix.version }}
       - run: bun install --frozen-lockfile
       - run: bun run test
+  node_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [18, 20, 22]
+    name: Node ${{ matrix.version }} tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
+      - run: npm install -g yarn
+      - uses: actions/setup-node@v4
+        with:
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn run test
