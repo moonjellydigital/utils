@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['1.1.26', '1.1.25', '1.1.24', '1.1.23']
+        version: ['1.1.27', '1.1.26', '1.1.25', '1.1.24']
     name: Bun ${{ matrix.version }} tests
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +43,7 @@ jobs:
       - run: npm install -g yarn
       - uses: actions/setup-node@v4
         with:
+          node-version: ${{ matrix.version }}
           cache: yarn
       - run: yarn install --frozen-lockfile
       - run: yarn run test
