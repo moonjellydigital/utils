@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "outDir": "dist",
-    "declarationMap": true
+    "declarationMap": true,
+    "verbatimModuleSyntax": false
   }
 }

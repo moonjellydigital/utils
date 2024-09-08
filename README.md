@@ -17,6 +17,8 @@ Tested on:
 - **Bun:** last 4 releases
 - **Deno:** latest stable major version
 
+Browser testing is coming.
+
 ## License
 
 [MIT](./LICENSE)
