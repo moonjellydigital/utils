@@ -44,7 +44,7 @@
   },
   "prettier": "@moonjellydigital/prettier-config",
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.16.1",
+    "@arethetypeswrong/cli": "^0.15.4",
     "@eslint/js": "^9.10.0",
     "@moonjellydigital/prettier-config": "^1.0.0",
     "@types/bun": "^1.1.8",
