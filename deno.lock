@@ -559,22 +559,22 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@arethetypeswrong/cli@^0.15.4",
-        "npm:@eslint/js@^9.9.1",
+        "npm:@arethetypeswrong/cli@^0.16.1",
+        "npm:@eslint/js@^9.10.0",
         "npm:@moonjellydigital/prettier-config@^1.0.0",
-        "npm:@types/bun@^1.1.7",
+        "npm:@types/bun@^1.1.8",
         "npm:@types/eslint-config-prettier@^6.11.3",
         "npm:@types/eslint__js@^8.42.3",
         "npm:@types/prettier@^3.0.0",
         "npm:@vitest/coverage-v8@^2.0.5",
         "npm:eslint-config-prettier@^9.1.0",
         "npm:eslint-plugin-jsdoc@^50.2.2",
-        "npm:eslint@^9.9.1",
+        "npm:eslint@^9.10.0",
         "npm:globals@^15.9.0",
         "npm:husky@^9.1.5",
-        "npm:lint-staged@^15.2.9",
+        "npm:lint-staged@^15.2.10",
         "npm:prettier@^3.3.3",
-        "npm:typescript-eslint@^8.2.0",
+        "npm:typescript-eslint@^8.4.0",
         "npm:typescript@^5.5.4",
         "npm:vitest@^2.0.5"
       ]
