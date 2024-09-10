@@ -80,11 +80,7 @@ describe('randomInt', () => {
     'randomInt(%d, %d) should be clamped to the inclusive range of Number.MIN_SAFE_INTEGER to Number.MAX_SAFE_INTEGER',
     (min, max, expected) => {
       const rand = <number>randomInt(min, max);
-      expect(
-        rand >= Number.MIN_SAFE_INTEGER &&
-          rand <= Number.MAX_SAFE_INTEGER &&
-          Number.isInteger(rand),
-      ).toBe(expected);
+      expect(Number.isSafeInteger(rand)).toBe(expected);
     },
   );
 
