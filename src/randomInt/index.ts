@@ -1,4 +1,4 @@
-import { type ErrData } from '../err/index.js';
+import type { ErrData } from '../err/index.js';
 
 /**
  * Generates a random integer between min and max. The range of possible integers
@@ -73,9 +73,10 @@ export const randomInt = (min: number, max: number): number | Error => {
   const potentialRet = Math.floor(
     Math.random() * (maxFloor - minCeil + 1) + minCeil,
   );
-  // Occasionally the above calculation produces a number greater than Number.MAX_SAFE_INTEGER
-  // when min is Number.MAX_SAFE_INTEGER - 1 and max is Number.MAX_SAFE_INTEGER. When that
-  // happens, the return value is clamped to Number.MAX_SAFE_INTEGER.
+  // Occasionally on some hardware the above calculation produces a number greater
+  // than Number.MAX_SAFE_INTEGER when min is Number.MAX_SAFE_INTEGER - 1 and max
+  // is Number.MAX_SAFE_INTEGER. When that happens, the return value is clamped
+  // to Number.MAX_SAFE_INTEGER.
   return potentialRet > Number.MAX_SAFE_INTEGER ?
       Number.MAX_SAFE_INTEGER
     : potentialRet;
