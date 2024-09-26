@@ -16,6 +16,7 @@ describe('randomInt', () => {
     [[] as unknown as number, 6451923, 'expected placeholder'],
     [[1] as unknown as number, 6451923, 'expected placeholder'],
     [true as unknown as number, 6451923, 'expected placeholder'],
+    [false as unknown as number, 6451923, 'expected placeholder'],
     [null as unknown as number, 6451923, 'expected placeholder'],
   ])(
     'should not coerce min arg global isNaN-style, should return a TypeError with correct ErrData',
@@ -42,6 +43,7 @@ describe('randomInt', () => {
     [[] as unknown as number, 6451923, 'expected placeholder'],
     [[1] as unknown as number, 6451923, 'expected placeholder'],
     [true as unknown as number, 6451923, 'expected placeholder'],
+    [false as unknown as number, 6451923, 'expected placeholder'],
     [null as unknown as number, 6451923, 'expected placeholder'],
   ])(
     'should not coerce max arg global isNaN-style, should return a TypeError with correct ErrData',
