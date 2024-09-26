@@ -10,12 +10,24 @@ import type { ErrData } from '../err/index.js';
  *
  * Unlike lodash's _.random, randomInt does not swap min and max if max is smaller than min.
  *
+ * Arguments will not be coerced. Arguments of types other than number will return a type error.
+ *
  * Do not use for security purposes, use the Crypto built-in instead.
  * @param min A number smaller than max, may be a float
  * @param max A number larger than min, may be a float
  * @returns An integer within the inclusive range of Number.MIN_SAFE_INTEGER to Number.MAX_SAFE_INTEGER, or an Error
  */
 export const randomInt = (min: number, max: number): number | Error => {
+  if (typeof min !== 'number' || typeof max !== 'number') {
+    const msg = `Both min and max must be of number type. Args: min was ${min}, max was ${max}`;
+    const errData: ErrData = {
+      code: 'WrongType',
+      prevErr: null,
+      args: [min, max],
+    };
+    return new TypeError(msg, { cause: errData });
+  }
+
   let minCeil = Math.ceil(min);
   let maxFloor = Math.floor(max);
 

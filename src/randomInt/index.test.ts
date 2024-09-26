@@ -3,34 +3,73 @@ import { randomInt } from '.';
 import { describe, test, expect } from 'vitest';
 
 describe('randomInt', () => {
-  test('should return a TypeError, including correct ErrData, when Math.ceil(min) is NaN', () => {
-    const rand = <Error>randomInt('str' as unknown as number, 4);
-    const errData = rand.cause as ErrData;
-    expect(rand).toBeInstanceOf(TypeError);
-    expect(errData.code).toBe('NaN');
-    expect(errData.prevErr).toBeNull();
-    expect(errData.args).toEqual(['str', 4]);
-  });
+  test.each([
+    ['' as unknown as number, 4, 'expected placeholder'],
+    [' ' as unknown as number, 4, 'expected placeholder'],
+    ['42' as unknown as number, 48, 'expected placeholder'],
+    ['42.42' as unknown as number, 48, 'expected placeholder'],
+    [
+      new Date() as unknown as number,
+      Number.MAX_SAFE_INTEGER,
+      'expect placeholder',
+    ],
+    [[] as unknown as number, 6451923, 'expected placeholder'],
+    [[1] as unknown as number, 6451923, 'expected placeholder'],
+    [true as unknown as number, 6451923, 'expected placeholder'],
+    [null as unknown as number, 6451923, 'expected placeholder'],
+  ])(
+    'should not coerce min arg global isNaN-style, should return a TypeError with correct ErrData',
+    (min, max) => {
+      const rand = <Error>randomInt(min as unknown as number, max);
+      const errData = rand.cause as ErrData;
+      expect(rand).toBeInstanceOf(TypeError);
+      expect(errData.code).toBe('WrongType');
+      expect(errData.prevErr).toBeNull();
+      expect(errData.args).toEqual([min, max]);
+    },
+  );
 
-  test('should return a TypeError, including correct ErrData, when Math.floor(max) is NaN', () => {
-    const rand = <Error>randomInt(4, 'str' as unknown as number);
-    const errData = rand.cause as ErrData;
-    expect(rand).toBeInstanceOf(TypeError);
-    expect(errData.code).toBe('NaN');
-    expect(errData.prevErr).toBeNull();
-    expect(errData.args).toEqual([4, 'str']);
-  });
+  test.each([
+    [-1, '' as unknown as number, 'expected placeholder'],
+    [-1, ' ' as unknown as number, 'expected placeholder'],
+    [40, '42' as unknown as number, 'expected placeholder'],
+    [40, '42.42' as unknown as number, 'expected placeholder'],
+    [
+      new Date() as unknown as number,
+      Number.MAX_SAFE_INTEGER,
+      'expect placeholder',
+    ],
+    [[] as unknown as number, 6451923, 'expected placeholder'],
+    [[1] as unknown as number, 6451923, 'expected placeholder'],
+    [true as unknown as number, 6451923, 'expected placeholder'],
+    [null as unknown as number, 6451923, 'expected placeholder'],
+  ])(
+    'should not coerce max arg global isNaN-style, should return a TypeError with correct ErrData',
+    (min, max) => {
+      const rand = <Error>randomInt(min, max as unknown as number);
+      const errData = rand.cause as ErrData;
+      expect(rand).toBeInstanceOf(TypeError);
+      expect(errData.code).toBe('WrongType');
+      expect(errData.prevErr).toBeNull();
+      expect(errData.args).toEqual([min, max]);
+    },
+  );
 
-  test('should return a TypeError, including correct ErrData, when Math.ceil(min) and Math.floor(max) are NaN', () => {
-    const rand = <Error>(
-      randomInt('str1' as unknown as number, 'str2' as unknown as number)
-    );
-    const errData = rand.cause as ErrData;
-    expect(rand).toBeInstanceOf(TypeError);
-    expect(errData.code).toBe('NaN');
-    expect(errData.prevErr).toBeNull();
-    expect(errData.args).toEqual(['str1', 'str2']);
-  });
+  test.each([
+    [NaN, 42, 'expected placeholder'],
+    [42, NaN, 'expected placeholder'],
+    [NaN, NaN, 'expected placeholder'],
+  ])(
+    'should return a TypeError with correct ErrData when Math.ceil(min) and/or Math.floor(max) are NaN',
+    (min, max) => {
+      const rand = <Error>randomInt(min, max);
+      const errData = rand.cause as ErrData;
+      expect(rand).toBeInstanceOf(TypeError);
+      expect(errData.code).toBe('NaN');
+      expect(errData.prevErr).toBeNull();
+      expect(errData.args).toEqual([min, max]);
+    },
+  );
 
   test('should return a RangeError, including correct ErrData, when Math.ceil(min) and Math.floor(max) are equal', () => {
     const rand = <Error>randomInt(10, 10.2);

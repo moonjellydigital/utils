@@ -1,4 +1,4 @@
-export type ErrCode = 'NaN' | 'InvalidRange';
+export type ErrCode = 'NaN' | 'InvalidRange' | 'WrongType';
 
 export interface ErrData {
   code: ErrCode;
