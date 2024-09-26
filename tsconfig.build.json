@@ -10,6 +10,7 @@
     "declaration": true,
     "outDir": "dist",
     "declarationMap": true,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
+    "noUnusedParameters": true
   }
 }

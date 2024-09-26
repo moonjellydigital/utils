@@ -1,6 +1,12 @@
 import { noop } from '.';
-import { expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
-test('should return undefined', () => {
-  expect(noop()).toBeUndefined();
+describe('noop', () => {
+  test('should return undefined without args', () => {
+    expect(noop()).toBeUndefined();
+  });
+
+  test('should return undefined with args', () => {
+    expect(noop(24, 32)).toBeUndefined();
+  });
 });
