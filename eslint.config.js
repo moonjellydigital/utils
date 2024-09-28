@@ -12,6 +12,9 @@ export default tseslint.config(
   jsdoc.configs['flat/recommended-typescript'],
   eslintConfigPrettier,
   {
+    ignores: ['dist/**/*'],
+  },
+  {
     languageOptions: {
       globals: globals.node,
     },
