@@ -1,4 +1,4 @@
-import type { ErrData } from '../err/index.js';
+import type { ErrData } from '../types.js';
 
 /**
  * Generates a random integer between min and max. The range of possible integers

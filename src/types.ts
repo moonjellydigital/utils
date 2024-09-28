@@ -5,3 +5,9 @@ export interface ErrData {
   prevErr: null | Error;
   args: null | unknown[];
 }
+
+export interface Segment<T> {
+  readonly start: T;
+  readonly end: T;
+  includes: (value: T) => boolean | Error;
+}
