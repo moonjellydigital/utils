@@ -1,3 +1,4 @@
+import { isNumber } from '../isNumber/index.js';
 import type { ErrData } from '../types.js';
 
 /**
@@ -18,7 +19,7 @@ import type { ErrData } from '../types.js';
  * @returns An integer within the inclusive range of Number.MIN_SAFE_INTEGER to Number.MAX_SAFE_INTEGER, or an Error
  */
 export const randomInt = (min: number, max: number): number | Error => {
-  if (typeof min !== 'number' || typeof max !== 'number') {
+  if (!isNumber(min) || !isNumber(max)) {
     const msg = `Both min and max must be of number type. Args: min was ${min}, max was ${max}`;
     const errData: ErrData = {
       code: 'WrongType',
@@ -28,8 +29,8 @@ export const randomInt = (min: number, max: number): number | Error => {
     return new TypeError(msg, { cause: errData });
   }
 
-  let minCeil = Math.ceil(min);
-  let maxFloor = Math.floor(max);
+  let minCeil = Math.ceil(min.valueOf());
+  let maxFloor = Math.floor(max.valueOf());
 
   if (Number.isNaN(minCeil) || Number.isNaN(maxFloor)) {
     const msg = `Both min and max must be numbers. Args: min was ${min}, max was ${max}`;
@@ -38,7 +39,7 @@ export const randomInt = (min: number, max: number): number | Error => {
       prevErr: null,
       args: [min, max],
     };
-    return new TypeError(msg, { cause: errData });
+    return new RangeError(msg, { cause: errData });
   }
 
   if (

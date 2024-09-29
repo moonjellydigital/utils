@@ -61,12 +61,15 @@ describe('randomInt', () => {
     [NaN, 42, 'expected placeholder'],
     [42, NaN, 'expected placeholder'],
     [NaN, NaN, 'expected placeholder'],
+    [new Number(NaN), new Number(NaN), 'expected placeholder'],
   ])(
-    'should return a TypeError with correct ErrData when Math.ceil(min) and/or Math.floor(max) are NaN',
+    'should return a RangeError with correct ErrData when Math.ceil(min) and/or Math.floor(max) are NaN',
     (min, max) => {
-      const rand = <Error>randomInt(min, max);
+      const rand = <Error>(
+        randomInt(min as unknown as number, max as unknown as number)
+      );
       const errData = rand.cause as ErrData;
-      expect(rand).toBeInstanceOf(TypeError);
+      expect(rand).toBeInstanceOf(RangeError);
       expect(errData.code).toBe('NaN');
       expect(errData.prevErr).toBeNull();
       expect(errData.args).toEqual([min, max]);
@@ -135,13 +138,15 @@ describe('randomInt', () => {
     [-270, 0, true],
     [-180, 180, true],
     [173437, 6451923, true],
+    [new Number(4) as number, new Number(27.5) as number, true],
   ])(
-    'randomInt(%d, %d) should return an integer in the inclusive range of min to max',
+    'randomInt(%d, %d) should return an integer in the inclusive range of min to max that is a number primitive',
     (min, max, expected) => {
       const rand = <number>randomInt(min, max);
-      expect(rand >= min && rand <= max && Number.isInteger(rand)).toBe(
+      expect(rand >= min && rand <= max && Number.isSafeInteger(rand)).toBe(
         expected,
       );
+      expect(typeof rand).toBe('number');
     },
   );
 });
