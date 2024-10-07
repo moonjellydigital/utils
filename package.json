@@ -1,6 +1,6 @@
 {
   "name": "@moonjellydigital/utils",
-  "description": "utilites",
+  "description": "utilities",
   "version": "0.1.0-dev",
   "main": "./dist/index.js",
   "publishConfig": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "keywords": [
     "utils",
-    "utilites"
+    "utilities"
   ],
   "homepage": "https://github.com/moonjellydigital/utils",
   "repository": {
@@ -28,7 +28,7 @@
   "scripts": {
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "check-exports": "bunx attw --pack . --ignore-rules=cjs-resolves-to-esm",
     "build": "rm -rf ./dist && bunx tsc --build tsconfig.build.json",
     "tsc:ci": "bunx tsc",
