@@ -7,3 +7,4 @@ export { isNullPrototype } from './isNullPrototype/index.js';
 export { isString } from './isString/index.js';
 export { noop } from './noop/index.js';
 export { randomInt } from './randomInt/index.js';
+export { Queue } from './queue/index.js';

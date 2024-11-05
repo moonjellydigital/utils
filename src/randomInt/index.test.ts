@@ -1,4 +1,4 @@
-import type { ErrData } from '../types.js';
+import type { ErrData } from '../types.d.ts';
 import { randomInt } from '.';
 import { describe, test, expect } from 'vitest';
 

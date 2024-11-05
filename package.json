@@ -22,7 +22,9 @@
     "url": "https://github.com/moonjellydigital/utils/issues"
   },
   "files": [
-    "./dist/**/*"
+    "./dist/**/*.js",
+    "./dist/**/*.ts",
+    "./dist/**/*.map"
   ],
   "type": "module",
   "scripts": {
@@ -30,7 +32,7 @@
     "coverage": "vitest run --coverage",
     "prepare": "husky || true",
     "check-exports": "bunx attw --pack . --ignore-rules=cjs-resolves-to-esm",
-    "build": "rm -rf ./dist && bunx tsc --build tsconfig.build.json",
+    "build": "rm -rf ./dist && bunx tsc --build tsconfig.build.json && cp ./src/types.d.ts ./dist/",
     "tsc:ci": "bunx tsc",
     "fmt:ci": "bunx prettier --check .",
     "lint:ci": "bunx eslint ."
