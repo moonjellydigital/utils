@@ -8,3 +8,4 @@ export { isString } from './isString/index.js';
 export { noop } from './noop/index.js';
 export { randomInt } from './randomInt/index.js';
 export { Queue } from './queue/index.js';
+export { Stack } from './stack/index.js';
