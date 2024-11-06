@@ -88,6 +88,13 @@ export class Stack<T> {
   }
 
   /**
+   * @returns A string representation of the stack's elements.
+   */
+  toString() {
+    return this.#elements.toString();
+  }
+
+  /**
    * Read-only length property.
    * @returns The number of elements in the stack.
    */

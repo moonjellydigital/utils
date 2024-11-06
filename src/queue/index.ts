@@ -88,6 +88,13 @@ export class Queue<T> {
   }
 
   /**
+   * @returns A string representation of the queue's elements.
+   */
+  toString() {
+    return this.#elements.toString();
+  }
+
+  /**
    * Read-only length property.
    * @returns The number of elements in the queue.
    */

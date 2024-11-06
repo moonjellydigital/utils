@@ -107,4 +107,12 @@ describe('Queue', () => {
     expect(errData.prevErr).toBeInstanceOf(Error);
     expect(errData.args).toEqual([]);
   });
+
+  test('toString returns a string representation of the queue elements in the correct order', () => {
+    const q = new Queue();
+    q.add('item1');
+    q.add('item2');
+    q.add('item3');
+    expect(q.toString()).toContain('item1,item2,item3');
+  });
 });

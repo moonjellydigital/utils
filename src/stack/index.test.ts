@@ -107,4 +107,12 @@ describe('Stack', () => {
     expect(errData.prevErr).toBeInstanceOf(Error);
     expect(errData.args).toEqual([]);
   });
+
+  test('toString returns a string representation of the stack elements in the correct order', () => {
+    const stack = new Stack();
+    stack.add('item1');
+    stack.add('item2');
+    stack.add('item3');
+    expect(stack.toString()).toContain('item1,item2,item3');
+  });
 });
