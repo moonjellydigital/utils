@@ -2,6 +2,7 @@ import type { ErrData } from '../types.d.ts';
 
 export class Stack<T> {
   #elements: T[];
+  #mjdUtilsStack = undefined;
 
   /**
    * Stack is a simple LIFO queue.
@@ -100,5 +101,22 @@ export class Stack<T> {
    */
   get length(): number {
     return this.#elements.length;
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'Stack';
+  }
+
+  /**
+   * Performs a brand check.
+   * @param obj The object to check.
+   * @returns True if the object was created with the Stack constructor, false otherwise.
+   */
+  static isStack(obj: unknown): boolean {
+    if (typeof obj !== 'object' || obj === null) {
+      return false;
+    }
+
+    return #mjdUtilsStack in obj;
   }
 }

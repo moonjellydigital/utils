@@ -115,4 +115,29 @@ describe('Stack', () => {
     stack.add('item3');
     expect(stack.toString()).toContain('item1,item2,item3');
   });
+
+  test('toStringTag returns class name', () => {
+    const stack = new Stack();
+    expect(Object.prototype.toString.call(stack)).toContain('Stack');
+  });
+
+  test('brand check returns true for instances of Stack', () => {
+    const stack = new Stack();
+    expect(Stack.isStack(stack)).toBe(true);
+  });
+
+  test.each([
+    ['', false],
+    [0, false],
+    [true, false],
+    [false, false],
+    [0n, false],
+    [undefined, false],
+    [null, false],
+    [Symbol('Stack'), false],
+    [[], false],
+    [{}, false],
+  ])('brand check isStack(%s) returns %s', (arg, expected) => {
+    expect(Stack.isStack(arg)).toBe(expected);
+  });
 });

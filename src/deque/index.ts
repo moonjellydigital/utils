@@ -2,6 +2,7 @@ import type { ErrData } from '../types.d.ts';
 
 export class Deque<T> {
   #elements: T[];
+  #mjdUtilsDeque = undefined;
 
   /**
    * Deque is a simple double-ended queue.
@@ -137,5 +138,22 @@ export class Deque<T> {
    */
   get length(): number {
     return this.#elements.length;
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'Deque';
+  }
+
+  /**
+   * Performs a brand check.
+   * @param obj The object to check.
+   * @returns True if the object was created with the Deque constructor, false otherwise.
+   */
+  static isDeque(obj: unknown): boolean {
+    if (typeof obj !== 'object' || obj === null) {
+      return false;
+    }
+
+    return #mjdUtilsDeque in obj;
   }
 }

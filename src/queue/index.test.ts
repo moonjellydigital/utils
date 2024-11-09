@@ -115,4 +115,29 @@ describe('Queue', () => {
     q.add('item3');
     expect(q.toString()).toContain('item1,item2,item3');
   });
+
+  test('toStringTag returns class name', () => {
+    const q = new Queue();
+    expect(Object.prototype.toString.call(q)).toContain('Queue');
+  });
+
+  test('brand check returns true for instances of Queue', () => {
+    const q = new Queue();
+    expect(Queue.isQueue(q)).toBe(true);
+  });
+
+  test.each([
+    ['', false],
+    [0, false],
+    [true, false],
+    [false, false],
+    [0n, false],
+    [undefined, false],
+    [null, false],
+    [Symbol('Queue'), false],
+    [[], false],
+    [{}, false],
+  ])('brand check isQueue(%s) returns %s', (arg, expected) => {
+    expect(Queue.isQueue(arg)).toBe(expected);
+  });
 });

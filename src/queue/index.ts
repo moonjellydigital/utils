@@ -2,6 +2,7 @@ import type { ErrData } from '../types.d.ts';
 
 export class Queue<T> {
   #elements: T[];
+  #mjdUtilsQueue = undefined;
 
   /**
    * Queue is a simple FIFO queue.
@@ -100,5 +101,22 @@ export class Queue<T> {
    */
   get length(): number {
     return this.#elements.length;
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'Queue';
+  }
+
+  /**
+   * Performs a brand check.
+   * @param obj The object to check.
+   * @returns True if the object was made with the Queue constructor, false otherwise.
+   */
+  static isQueue(obj: unknown): boolean {
+    if (typeof obj !== 'object' || obj === null) {
+      return false;
+    }
+
+    return #mjdUtilsQueue in obj;
   }
 }
