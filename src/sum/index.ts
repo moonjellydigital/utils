@@ -1,5 +1,5 @@
-import { isNumber } from '../isNumber';
-import type { ErrData } from '../types';
+import { isNumber } from '../isNumber/index.js';
+import type { ErrData } from '../types.d.ts';
 
 /**
  * Sums an array of numbers.
