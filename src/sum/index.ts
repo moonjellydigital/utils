@@ -4,11 +4,13 @@ import type { ErrData } from '../types.d.ts';
 /**
  * Sums an array of numbers.
  *
- * Some conditions will cause `sum` to return early. If `sum` reaches an array
- * element that is NaN or a non-number type it will stop execution and return an
- * `Error`. If the running total reaches equal to or greater than Number.MAX_VALUE
- * or equal to or less than -Number.MAX_VALUE, `sum` will stop execution and return
- * Number.MAX_VALUE or -Number.MAX_VALUE as appropriate.
+ * If the sum is equal to or greater than Number.MAX_VALUE the return value will
+ * be clamped to Number.MAX_VALUE. If the sum is equal to or less than -Number.MAX_VALUE
+ * the return value will be clamped to -Number.MAX_VALUE. During calculation, `sum`
+ * clamps the running total to between -Number.MAX_VALUE and Number.MAX_VALUE inclusive.
+ *
+ * If `sum` reaches an array element that is NaN or a non-number type it will stop
+ * execution and return an `Error`.
  *
  * `sum` can handle sparse arrays. Empty elements will be ignored.
  * @param numbers An array of numbers.
@@ -48,15 +50,15 @@ export const sum = (numbers: number[]): number | Error => {
       return new Error(msg, { cause: errData });
     }
 
+    total += numbers[i].valueOf();
+
     if (total >= Number.MAX_VALUE) {
-      return Number.MAX_VALUE;
+      total = Number.MAX_VALUE;
     }
 
     if (total <= -Number.MAX_VALUE) {
-      return -Number.MAX_VALUE;
+      total = -Number.MAX_VALUE;
     }
-
-    total += numbers[i].valueOf();
   }
 
   return total;

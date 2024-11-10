@@ -42,8 +42,9 @@ describe('sum', () => {
   test.each([
     [[1, 1, Number.MAX_VALUE, 1], Number.MAX_VALUE],
     [[Number.MAX_VALUE], Number.MAX_VALUE],
+    [[Infinity, -10], Number.MAX_VALUE],
   ])(
-    'should return Number.MAX_VALUE if the total is equal to or greater than Number.MAX_VALUE',
+    'should clamp return value to Number.MAX_VALUE if the total is equal to or greater than Number.MAX_VALUE',
     (arg, expected) => {
       expect(sum(arg)).toBe(expected);
     },
@@ -52,8 +53,9 @@ describe('sum', () => {
   test.each([
     [[-1, -1, -Number.MAX_VALUE, -1], -Number.MAX_VALUE],
     [[-Number.MAX_VALUE], -Number.MAX_VALUE],
+    [[-Infinity, 10], -Number.MAX_VALUE],
   ])(
-    'should return -Number.MAX_VALUE if the total is equal to or less than Number.MAX_VALUE',
+    'should clamp return value to -Number.MAX_VALUE if the total is equal to or less than Number.MAX_VALUE',
     (arg, expected) => {
       expect(sum(arg)).toBe(expected);
     },
@@ -64,7 +66,16 @@ describe('sum', () => {
     [[-1, -2, -3, -4], -10],
     [[-1, 0, 4], 3],
     [[100, -20], 80],
+    [[Number.MAX_VALUE, -1, -1], Number.MAX_VALUE - 2],
+    [[Number.MAX_VALUE, -10], Number.MAX_VALUE - 10],
+    [[-Number.MAX_VALUE, 1, 2], -Number.MAX_VALUE + 3],
+    [[-Number.MAX_VALUE, 1], -Number.MAX_VALUE + 1],
   ])('the sum of %s should equal %s', (arg, expected) => {
     expect(sum(arg)).toBe(expected);
+  });
+
+  test('should add Number objects', () => {
+    const arg = [Number(2), 4, 1, 7, Number(-3), 2, Number(10)];
+    expect(sum(arg)).toBe(23);
   });
 });

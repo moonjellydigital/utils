@@ -41,7 +41,8 @@
     "*.{json,yml,yaml,md}": "prettier --write",
     "*.{ts,js}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --fix",
+      "vitest --run"
     ]
   },
   "prettier": "@moonjellydigital/prettier-config",

@@ -1,1 +1,1 @@
-bunx tsc && bun run test && bun run build && bunx lint-staged
+bunx tsc && bun run build && bunx lint-staged
