@@ -2,23 +2,23 @@ import { isNumber } from '../isNumber/index.js';
 import type { ErrData } from '../types.d.ts';
 
 /**
- * Sums an array of numbers.
+ * Multiplies an array of numbers.
  *
- * `sum` returns 0 if the length of the array is 0, or all the elements are sparse.
+ * `multiply` returns 0 if the length of the array is 0, or all the elements are sparse.
  *
- * If the sum is equal to or greater than Number.MAX_VALUE the return value will
- * be clamped to Number.MAX_VALUE. If the sum is equal to or less than -Number.MAX_VALUE
- * the return value will be clamped to -Number.MAX_VALUE. During calculation, `sum`
+ * If the product is equal to or greater than Number.MAX_VALUE the return value will
+ * be clamped to Number.MAX_VALUE. If the product is equal to or less than -Number.MAX_VALUE
+ * the return value will be clamped to -Number.MAX_VALUE. During calculation, `multiply`
  * clamps the running total to between -Number.MAX_VALUE and Number.MAX_VALUE inclusive.
  *
- * If `sum` reaches an array element that is NaN or a non-number type it will stop
+ * If `multiply` reaches an array element that is NaN or a non-number type it will stop
  * execution and return an `Error`.
  *
- * `sum` can handle sparse arrays. Empty elements will be ignored.
+ * `multiply` can handle sparse arrays. Empty elements will be ignored.
  * @param numbers An array of numbers.
- * @returns The sum of the numbers in the array, or an Error.
+ * @returns The product of the numbers in the array, or an Error.
  */
-export const sum = (numbers: number[]): number | Error => {
+export const multiply = (numbers: number[]): number | Error => {
   if (!Array.isArray(numbers)) {
     const msg = `Argument numbers must be an array.`;
     const errData: ErrData = {
@@ -34,7 +34,7 @@ export const sum = (numbers: number[]): number | Error => {
   }
 
   const len = numbers.length;
-  let total = 0;
+  let total = undefined;
 
   for (let i = 0; i < len; i++) {
     // ignore sparse element
@@ -52,7 +52,12 @@ export const sum = (numbers: number[]): number | Error => {
       return new Error(msg, { cause: errData });
     }
 
-    total += numbers[i].valueOf();
+    if (total === undefined) {
+      total = numbers[i].valueOf();
+      continue;
+    }
+
+    total = (total as number) * numbers[i].valueOf();
 
     if (total >= Number.MAX_VALUE) {
       total = Number.MAX_VALUE;
@@ -63,5 +68,5 @@ export const sum = (numbers: number[]): number | Error => {
     }
   }
 
-  return total;
+  return total === undefined ? 0 : total;
 };
