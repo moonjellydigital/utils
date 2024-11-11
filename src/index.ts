@@ -1,5 +1,6 @@
 export { chunk } from './chunk/index.js';
 export { Deque } from './deque/index.js';
+export { isArrayLike } from './isArrayLike/index.js';
 export { isBigInt } from './isBigInt/index.js';
 export { isBoolean } from './isBoolean/index.js';
 export { isNumber } from './isNumber/index.js';
