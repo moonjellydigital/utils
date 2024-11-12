@@ -5,12 +5,14 @@
  */
 export const isArrayLike = (value: unknown): boolean => {
   if (
-    typeof value === 'object' &&
-    value !== null &&
-    'length' in value &&
-    typeof value.length === 'number' &&
-    value.length >= 0 &&
-    value.length - 1 in value
+    typeof value === 'string' ||
+    (typeof value === 'object' &&
+      value !== null &&
+      'length' in value &&
+      typeof value.length === 'number' &&
+      value.length >= 0 &&
+      value.length <= Number.MAX_SAFE_INTEGER &&
+      value.length - 1 in value)
   ) {
     return true;
   }

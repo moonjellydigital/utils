@@ -1,5 +1,5 @@
-import { isNumber } from '../isNumber/index.js';
-import type { ErrData } from '../types.d.ts';
+import { isNumber } from '../../isNumber/index.js';
+import type { ErrData } from '../../types.d.ts';
 
 /**
  * Splits an array into a multi-dimensional array with sub-arrays of a specified length.

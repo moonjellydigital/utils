@@ -1,6 +1,6 @@
 import { chunk } from '.';
 import { describe, test, expect } from 'vitest';
-import type { ErrData } from '../types';
+import type { ErrData } from '../../types';
 
 describe('chunk', () => {
   test('should return a TypeError if arr is not an array', () => {

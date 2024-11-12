@@ -1,12 +1,13 @@
-export { chunk } from './chunk/index.js';
+export { chunk } from './array/chunk/index.js';
 export { Deque } from './deque/index.js';
+export { drop } from './array/drop/index.js';
 export { isArrayLike } from './isArrayLike/index.js';
 export { isBigInt } from './isBigInt/index.js';
 export { isBoolean } from './isBoolean/index.js';
-export { isNumber } from './isNumber/index.js';
 export { isNonNullObject } from './isNonNullObject/index.js';
 export { isNullish } from './isNullish/index.js';
 export { isNullPrototype } from './isNullPrototype/index.js';
+export { isNumber } from './isNumber/index.js';
 export { isString } from './isString/index.js';
 export { multiply } from './multiply/index.js';
 export { noop } from './noop/index.js';
