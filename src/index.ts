@@ -17,3 +17,4 @@ export { randomInt } from './randomInt/index.js';
 export { Stack } from './stack/index.js';
 export { sum } from './sum/index.js';
 export { take } from './array/take/index.js';
+export { takeRight } from './array/takeRight/index.js';
