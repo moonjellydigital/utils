@@ -2,6 +2,7 @@ export { chunk } from './array/chunk/index.js';
 export { Deque } from './deque/index.js';
 export { drop } from './array/drop/index.js';
 export { dropRight } from './array/dropRight/index.js';
+export { dropWhile } from './array/dropWhile/index.js';
 export { isArrayLike } from './isArrayLike/index.js';
 export { isBigInt } from './isBigInt/index.js';
 export { isBoolean } from './isBoolean/index.js';
