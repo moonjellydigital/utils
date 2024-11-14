@@ -1,4 +1,10 @@
-export type ErrCode = 'NaN' | 'InvalidRange' | 'WrongType' | 'DeepCopyFailed';
+export type ErrCode =
+  | 'NaN'
+  | 'InvalidRange'
+  | 'WrongType'
+  | 'DeepCopyFailed'
+  | 'EmptyCollection'
+  | 'EmptySlot';
 
 export interface ErrData {
   code: ErrCode;

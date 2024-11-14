@@ -11,8 +11,7 @@ export const isArrayLike = (value: unknown): boolean => {
       'length' in value &&
       typeof value.length === 'number' &&
       value.length >= 0 &&
-      value.length <= Number.MAX_SAFE_INTEGER &&
-      value.length - 1 in value)
+      value.length <= Number.MAX_SAFE_INTEGER)
   ) {
     return true;
   }

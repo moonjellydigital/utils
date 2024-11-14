@@ -4,6 +4,7 @@ export { drop } from './array/drop/index.js';
 export { dropRight } from './array/dropRight/index.js';
 export { dropRightWhile } from './array/dropRightWhile/index.js';
 export { dropWhile } from './array/dropWhile/index.js';
+export { first } from './array/first/index.js';
 export { isArrayLike } from './isArrayLike/index.js';
 export { isBigInt } from './isBigInt/index.js';
 export { isBoolean } from './isBoolean/index.js';

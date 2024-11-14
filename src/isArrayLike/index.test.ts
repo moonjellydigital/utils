@@ -21,6 +21,7 @@ describe('isArrayLike', () => {
   });
 
   test.each([
+    [[], true],
     [[0, , 0, , 1, 2], true], // eslint-disable-line no-sparse-arrays
     ['string primitive', true],
     [new String('string object'), true],
