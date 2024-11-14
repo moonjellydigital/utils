@@ -18,6 +18,7 @@ export { multiply } from './multiply/index.js';
 export { noop } from './noop/index.js';
 export { Queue } from './queue/index.js';
 export { randomInt } from './randomInt/index.js';
+export { sample } from './array/sample/index.js';
 export { Stack } from './stack/index.js';
 export { sum } from './sum/index.js';
 export { tail } from './array/tail/index.js';

@@ -4,7 +4,8 @@ export type ErrCode =
   | 'WrongType'
   | 'DeepCopyFailed'
   | 'EmptyCollection'
-  | 'EmptySlot';
+  | 'EmptySlot'
+  | 'UnknownError';
 
 export interface ErrData {
   code: ErrCode;
