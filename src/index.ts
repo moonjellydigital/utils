@@ -13,6 +13,7 @@ export { isNullish } from './isNullish/index.js';
 export { isNullPrototype } from './isNullPrototype/index.js';
 export { isNumber } from './isNumber/index.js';
 export { isString } from './isString/index.js';
+export { last } from './array/last/index.js';
 export { multiply } from './multiply/index.js';
 export { noop } from './noop/index.js';
 export { Queue } from './queue/index.js';
