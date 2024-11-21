@@ -1,6 +1,6 @@
 import { sum } from '.';
 import { describe, test, expect } from 'vitest';
-import type { ErrData } from '../types.d.ts';
+import type { ErrData } from '../../types.d.ts';
 
 describe('sum', () => {
   test('should return a TypeError if the argument is not an array', () => {

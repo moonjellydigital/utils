@@ -1,5 +1,5 @@
-import { isNumber } from '../isNumber/index.js';
-import type { ErrData } from '../types.d.ts';
+import { isNumber } from '../../language/isNumber/index.js';
+import type { ErrData } from '../../types.d.ts';
 
 /**
  * Generates a random integer between min and max. The range of possible integers

@@ -1,4 +1,4 @@
-import { isNumber } from '../../isNumber/index.js';
+import { isNumber } from '../../language/isNumber/index.js';
 import type { ErrData } from '../../types.d.ts';
 
 /**

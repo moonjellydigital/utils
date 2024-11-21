@@ -1,5 +1,5 @@
-import { isArrayLike } from '../../isArrayLike/index.js';
-import { randomInt } from '../../randomInt/index.js';
+import { isArrayLike } from '../../language/isArrayLike/index.js';
+import { randomInt } from '../../number/randomInt/index.js';
 import type { ErrData } from '../../types.d.ts';
 
 /**

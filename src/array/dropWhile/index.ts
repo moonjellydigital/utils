@@ -1,4 +1,4 @@
-import { isArrayLike } from '../../isArrayLike/index.js';
+import { isArrayLike } from '../../language/isArrayLike/index.js';
 import type { ErrData } from '../../types.d.ts';
 
 /**
