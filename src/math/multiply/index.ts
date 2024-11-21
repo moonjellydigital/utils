@@ -1,4 +1,5 @@
 import { isNumber } from '../../language/isNumber/index.js';
+import { clamp } from '../../number/clamp/index.js';
 import type { ErrData } from '../../types.d.ts';
 
 /**
@@ -34,6 +35,8 @@ export const multiply = (numbers: number[]): number | Error => {
   }
 
   const len = numbers.length;
+  const clampTotal = (current: number) =>
+    clamp(current, -Number.MAX_VALUE, Number.MAX_VALUE);
   let total = undefined;
 
   for (let i = 0; i < len; i++) {
@@ -59,13 +62,22 @@ export const multiply = (numbers: number[]): number | Error => {
 
     total = (total as number) * numbers[i].valueOf();
 
-    if (total >= Number.MAX_VALUE) {
-      total = Number.MAX_VALUE;
+    const clampedTotal = clampTotal(total);
+
+    if (
+      typeof clampedTotal === 'object' &&
+      (clampedTotal as unknown) instanceof Error
+    ) {
+      const msg = `An unknown error has occurred. Execution stopped.`;
+      const errData: ErrData = {
+        code: 'UnknownError',
+        prevErr: total as unknown as Error,
+        args: [numbers],
+      };
+      return new Error(msg, { cause: errData });
     }
 
-    if (total <= -Number.MAX_VALUE) {
-      total = -Number.MAX_VALUE;
-    }
+    total = clampedTotal as number;
   }
 
   return total === undefined ? 0 : total;

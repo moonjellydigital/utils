@@ -41,7 +41,9 @@
     "*.{json,yml,yaml,md}": "prettier --write",
     "*.{ts,js}": [
       "prettier --write",
-      "eslint --fix",
+      "eslint --fix"
+    ],
+    "*.{test.ts,test.js}": [
       "vitest --run"
     ]
   },
