@@ -15,6 +15,7 @@ export { isNullPrototype } from './language/isNullPrototype/index.js';
 export { isNumber } from './language/isNumber/index.js';
 export { isString } from './language/isString/index.js';
 export { last } from './array/last/index.js';
+export { mean } from './math/mean/index.js';
 export { multiply } from './math/multiply/index.js';
 export { noop } from './noop/index.js';
 export { Queue } from './queue/index.js';
