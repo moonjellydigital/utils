@@ -45,8 +45,18 @@ export const sum = (numbers: number[]): number | Error => {
       continue;
     }
 
-    if (!isNumber(numbers[i]) || Number.isNaN(numbers[i])) {
-      const msg = `The element at index ${i} was not a number. Execution stopped.`;
+    if (!isNumber(numbers[i])) {
+      const msg = `The element at index ${i} was not of type number. Execution stopped.`;
+      const errData: ErrData = {
+        code: 'WrongType',
+        prevErr: null,
+        args: [numbers],
+      };
+      return new TypeError(msg, { cause: errData });
+    }
+
+    if (Number.isNaN(numbers[i].valueOf())) {
+      const msg = `The element at index ${i} was NaN. Execution stopped.`;
       const errData: ErrData = {
         code: 'NaN',
         prevErr: null,
@@ -63,7 +73,7 @@ export const sum = (numbers: number[]): number | Error => {
       typeof clampedTotal === 'object' &&
       (clampedTotal as unknown) instanceof Error
     ) {
-      const msg = `An unknown error has occurred. Execution stopped.`;
+      const msg = `An unknown error has occurred. Execution stopped. This may be a bug in @moonjellydigital/utils.`;
       const errData: ErrData = {
         code: 'UnknownError',
         prevErr: total as unknown as Error,

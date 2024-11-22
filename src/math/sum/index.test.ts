@@ -24,11 +24,20 @@ describe('sum', () => {
     expect(sum(arg)).toBe(expected);
   });
 
-  test.each([
-    [[0, 10, {}, 4], 'expected placeholder'],
-    [[1, NaN, 4, 7], 'expected placeholder'],
-  ])(
-    'should return an Error if an element in the array is not a number',
+  test.each([[[0, 10, {}, 4], 'expected placeholder']])(
+    'should return a TypeError if an element in the array is not of type number',
+    (arg) => {
+      const result = sum(arg as number[]) as Error;
+      const errData = result.cause as ErrData;
+      expect(result).toBeInstanceOf(TypeError);
+      expect(errData.code).toBe('WrongType');
+      expect(errData.prevErr).toBe(null);
+      expect(errData.args).toEqual([arg]);
+    },
+  );
+
+  test.each([[[1, NaN, 4, 7], 'expected placeholder']])(
+    'should return an Error if an element in the array is NaN',
     (arg) => {
       const result = sum(arg as number[]) as Error;
       const errData = result.cause as ErrData;

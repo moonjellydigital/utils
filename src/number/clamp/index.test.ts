@@ -101,6 +101,8 @@ describe('clamp', () => {
       Number.MAX_VALUE,
       Number.MIN_VALUE + 1,
     ],
+    [Infinity, -Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE],
+    [-Infinity, -Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE],
   ])('clamp(%s, %s, %s) should return %s', (n, lower, upper, expected) => {
     expect(clamp(n, lower, upper)).toBe(expected);
   });

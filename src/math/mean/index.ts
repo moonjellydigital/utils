@@ -78,7 +78,7 @@ export const mean = (numbers: number[]): number | Error => {
     const clampedTotal = clampValue(total);
 
     if (typeof clampedTotal === 'object' && clampedTotal instanceof Error) {
-      const msg = `An unknown error occurred. This may be a bug in @moonjellydigital/utils.`;
+      const msg = `An unknown error occurred. Execution stopped. This may be a bug in @moonjellydigital/utils.`;
       const errData: ErrData = {
         code: 'UnknownError',
         prevErr: clampedTotal,
