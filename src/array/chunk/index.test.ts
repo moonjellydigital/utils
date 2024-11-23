@@ -78,7 +78,33 @@ describe('chunk', () => {
     ],
     [[0, , 4, 5, ,], 2, [[0, ,], [4, 5], [,]]], // eslint-disable-line no-sparse-arrays
     [[2, 4, 6], 3, [[2, 4, 6]]],
+    [
+      new String('string'),
+      2,
+      [
+        ['s', 't'],
+        ['r', 'i'],
+        ['n', 'g'],
+      ],
+    ],
+    [
+      'string',
+      2,
+      [
+        ['s', 't'],
+        ['r', 'i'],
+        ['n', 'g'],
+      ],
+    ],
+    [
+      { 0: 'a', 1: 'b', 3: 'd', length: 4 },
+      2,
+      [
+        ['a', 'b'],
+        [, 'd'], // eslint-disable-line no-sparse-arrays
+      ],
+    ],
   ])('chunk(%s, %s) should equal %s', (arg1, arg2, expected) => {
-    expect(chunk(arg1, arg2)).toStrictEqual(expected);
+    expect(chunk(arg1 as ArrayLike<unknown>, arg2)).toStrictEqual(expected);
   });
 });

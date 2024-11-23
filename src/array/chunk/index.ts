@@ -1,21 +1,24 @@
+import { isArrayLike } from '../../language/isArrayLike/index.js';
 import { isNumber } from '../../language/isNumber/index.js';
 import type { ErrData } from '../../types.d.ts';
 
 /**
- * Splits an array into a multi-dimensional array with sub-arrays of a specified length.
+ * Splits an array-like object or string literal into a multi-dimensional array
+ * with sub-arrays of a specified length.
  *
- * If your array cannot be split into sub-arrays that all have the same length, the last
- * sub-array will be short. If your array has length 0, `chunk` will return [].
+ * If your array-like cannot be split into sub-arrays that all have the same
+ * length, the last sub-array will be short. If your array has length 0, `chunk`
+ * will return [].
  *
- * `chunk` does not mutate the original array, it returns a new array. If your array
- * contains object elements `chunk` will make a shallow copy of them.
- * @param arr The array to split.
+ * `chunk` does not mutate the original array-like, it returns a new array. If
+ * your array contains object elements `chunk` will make a shallow copy of them.
+ * @param arr The array-like to split.
  * @param size The length the sub-arrays should have.
  * @returns A new multi-dimensional array of chunks.
  */
-export const chunk = <T>(arr: T[], size: number): T[][] | Error => {
-  if (!Array.isArray(arr) || !isNumber(size)) {
-    const msg = `Argument arr must be an array. Argument size must be a number.`;
+export const chunk = <T>(arr: ArrayLike<T>, size: number): T[][] | Error => {
+  if (!isArrayLike(arr) || !isNumber(size)) {
+    const msg = `Argument arr must be an array-like. Argument size must be a number.`;
     const errData: ErrData = {
       code: 'WrongType',
       prevErr: null,
@@ -50,11 +53,11 @@ export const chunk = <T>(arr: T[], size: number): T[][] | Error => {
 
   for (let i = 0; i < numberOfChunks; i++) {
     if (currEnd === null) {
-      result[i] = arr.slice(currStart);
+      result[i] = Array.prototype.slice.call(arr, currStart);
       break;
     }
 
-    result[i] = arr.slice(currStart, currEnd);
+    result[i] = Array.prototype.slice.call(arr, currStart, currEnd);
 
     currStart = currEnd;
     currEnd = currStart + size > arr.length - 1 ? null : currStart + size;
