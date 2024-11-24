@@ -28,3 +28,4 @@ export { take } from './array/take/index.js';
 export { takeRight } from './array/takeRight/index.js';
 export { takeRightWhile } from './array/takeRightWhile/index.js';
 export { takeWhile } from './array/takeWhile/index.js';
+export { unsparse } from './array/unsparse/index.js';
