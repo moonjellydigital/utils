@@ -1,5 +1,6 @@
 export { chunk } from './collection/chunk/index.js';
 export { clamp } from './number/clamp/index.js';
+export { compact } from './collection/compact/index.js';
 export { Deque } from './deque/index.js';
 export { drop } from './collection/drop/index.js';
 export { dropRight } from './collection/dropRight/index.js';
