@@ -19,6 +19,7 @@ export { last } from './collection/last/index.js';
 export { mean } from './math/mean/index.js';
 export { multiply } from './math/multiply/index.js';
 export { noop } from './noop/index.js';
+export { nth } from './collection/nth/index.js';
 export { partition } from './collection/partition/index.js';
 export { Queue } from './queue/index.js';
 export { randomInt } from './number/randomInt/index.js';

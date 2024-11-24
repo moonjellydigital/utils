@@ -8,7 +8,7 @@ import type { ErrData } from '../../types.d.ts';
  * empty slot in a sparse array. It only returns undefined if the value at at
  * the index is undefined, unlike simply doing `arr[arr.length - 1]`.
  * @param arr The array-like object or string primitive.
- * @returns The value at index 0, or an Error.
+ * @returns The value at the last index in arr, or an Error.
  */
 export const last = <T>(arr: ArrayLike<T>): T | Error => {
   if (!isArrayLike(arr)) {
