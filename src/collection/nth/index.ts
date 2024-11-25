@@ -5,9 +5,9 @@ import type { ErrData } from '../../types.d.ts';
 /**
  * Returns the element at the supplied index of the array-like if it exists.
  *
- * `nth` returns an `Error` if the array-like is empty or the nth index is an
- * empty slot in a sparse array. It only returns undefined if the value at
- * the index is undefined, unlike simply doing `arr[index]`.
+ * `nth` returns an `Error` if the array-like is empty, the nth index is an
+ * empty slot in a sparse array, or the index is out of bounds. It only returns
+ * undefined if the value at the index is undefined, unlike simply doing `arr[index]`.
  * @param arr The array-like object or string primitive.
  * @param index The index to access.
  * @returns The value at index, or an Error.
