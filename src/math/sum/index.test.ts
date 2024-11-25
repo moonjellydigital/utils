@@ -3,14 +3,24 @@ import { describe, test, expect } from 'vitest';
 import type { ErrData } from '../../types.d.ts';
 
 describe('sum', () => {
-  test('should return a TypeError if the argument is not an array', () => {
-    const result = sum({} as unknown as number[]) as Error;
-    const errData = result.cause as ErrData;
-    expect(result).toBeInstanceOf(TypeError);
-    expect(errData.code).toBe('WrongType');
-    expect(errData.prevErr).toBe(null);
-    expect(errData.args).toEqual([{}]);
-  });
+  test.each([
+    [{} as unknown as number[], 'expected placeholder'],
+    ['string' as unknown as ArrayLike<number>, 'expected placeholder'],
+    [
+      new String('string') as unknown as ArrayLike<number>,
+      'expected placeholder',
+    ],
+  ])(
+    'should return a TypeError if the argument is not an array-like of numbers',
+    (arg) => {
+      const result = sum(arg) as Error;
+      const errData = result.cause as ErrData;
+      expect(result).toBeInstanceOf(TypeError);
+      expect(errData.code).toBe('WrongType');
+      expect(errData.prevErr).toBe(null);
+      expect(errData.args).toEqual([arg]);
+    },
+  );
 
   test('should return 0 if the array is empty', () => {
     const result = sum([] as number[]);
@@ -24,10 +34,12 @@ describe('sum', () => {
     expect(sum(arg)).toBe(expected);
   });
 
-  test.each([[[0, 10, {}, 4], 'expected placeholder']])(
+  test.each([
+    [[0, 10, {}, 4] as unknown as ArrayLike<number>, 'expected placeholder'],
+  ])(
     'should return a TypeError if an element in the array is not of type number',
     (arg) => {
-      const result = sum(arg as number[]) as Error;
+      const result = sum(arg) as Error;
       const errData = result.cause as ErrData;
       expect(result).toBeInstanceOf(TypeError);
       expect(errData.code).toBe('WrongType');
@@ -79,6 +91,7 @@ describe('sum', () => {
     [[Number.MAX_VALUE, -10], Number.MAX_VALUE - 10],
     [[-Number.MAX_VALUE, 1, 2], -Number.MAX_VALUE + 3],
     [[-Number.MAX_VALUE, 1], -Number.MAX_VALUE + 1],
+    [{ 0: 2, 1: 4, 2: 6, length: 3 }, 12],
   ])('the sum of %s should equal %s', (arg, expected) => {
     expect(sum(arg)).toBe(expected);
   });
