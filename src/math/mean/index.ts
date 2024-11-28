@@ -1,11 +1,13 @@
+import { isArrayLike } from '../../language/isArrayLike/index.js';
 import { isNumber } from '../../language/isNumber/index.js';
+import { isString } from '../../language/isString/index.js';
 import { clamp } from '../../number/clamp/index.js';
 import type { ErrData } from '../../types.d.ts';
 
 /**
- * Calculates the mean (average) of an array of numbers.
+ * Calculates the mean (average) of an array-like of numbers.
  *
- * `mean` returns 0 if the length of the array is 0, or all the elements are sparse.
+ * `mean` returns 0 if the length of the array-like is 0, or all the elements are sparse.
  *
  * If the result is equal to or greater than Number.MAX_VALUE the return value will
  * be clamped to Number.MAX_VALUE. If the result is equal to or less than -Number.MAX_VALUE
@@ -16,12 +18,12 @@ import type { ErrData } from '../../types.d.ts';
  * execution and return an `Error`.
  *
  * `mean` will ignore empty elements in sparse arrays.
- * @param numbers An array of numbers.
- * @returns The mean of the numbers in the array, or an Error.
+ * @param numbers An array-like of numbers.
+ * @returns The mean of the numbers in the array-like, or an Error.
  */
-export const mean = (numbers: number[]): number | Error => {
-  if (!Array.isArray(numbers)) {
-    const msg = `Argument numbers must be an array.`;
+export const mean = (numbers: ArrayLike<number>): number | Error => {
+  if (!isArrayLike(numbers) || isString(numbers)) {
+    const msg = `Argument numbers must be an array-like of numbers.`;
     const errData: ErrData = {
       code: 'WrongType',
       prevErr: null,

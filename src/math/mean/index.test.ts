@@ -3,14 +3,24 @@ import { describe, test, expect } from 'vitest';
 import type { ErrData } from '../../types.d.ts';
 
 describe('mean', () => {
-  test('should return a TypeError if the argument is not an array', () => {
-    const result = mean({} as unknown as number[]) as Error;
-    const errData = result.cause as ErrData;
-    expect(result).toBeInstanceOf(TypeError);
-    expect(errData.code).toBe('WrongType');
-    expect(errData.prevErr).toBe(null);
-    expect(errData.args).toEqual([{}]);
-  });
+  test.each([
+    [{} as unknown as ArrayLike<number>, 'expected placeholder'],
+    ['string' as unknown as ArrayLike<number>, 'expected placeholder'],
+    [
+      new String('string') as unknown as ArrayLike<number>,
+      'expected placeholder',
+    ],
+  ])(
+    'should return a TypeError if the argument is not an array-like of numbers',
+    (arg) => {
+      const result = mean(arg) as Error;
+      const errData = result.cause as ErrData;
+      expect(result).toBeInstanceOf(TypeError);
+      expect(errData.code).toBe('WrongType');
+      expect(errData.prevErr).toBe(null);
+      expect(errData.args).toEqual([arg]);
+    },
+  );
 
   test('should return 0 if the array is empty', () => {
     const result = mean([] as number[]);
@@ -75,6 +85,7 @@ describe('mean', () => {
     [[-1, -4, -3, -4], -3],
     [[-1, 0, 4], 1],
     [[100, -20], 40],
+    [{ 0: 100, 1: -20, length: 2 }, 40],
   ])('the average of %s should equal %s', (arg, expected) => {
     expect(mean(arg)).toBe(expected);
   });

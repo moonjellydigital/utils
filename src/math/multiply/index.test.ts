@@ -3,13 +3,20 @@ import { describe, test, expect } from 'vitest';
 import type { ErrData } from '../../types.d.ts';
 
 describe('multiply', () => {
-  test('should return a TypeError if the argument is not an array', () => {
-    const result = multiply({} as unknown as number[]) as Error;
+  test.each([
+    [{} as unknown as ArrayLike<number>, 'expected placeholder'],
+    ['string' as unknown as ArrayLike<number>, 'expected placeholder'],
+    [
+      new String('string') as unknown as ArrayLike<number>,
+      'expected placeholder',
+    ],
+  ])('should return a TypeError if the argument is not an array', (arg) => {
+    const result = multiply(arg) as Error;
     const errData = result.cause as ErrData;
     expect(result).toBeInstanceOf(TypeError);
     expect(errData.code).toBe('WrongType');
     expect(errData.prevErr).toBe(null);
-    expect(errData.args).toEqual([{}]);
+    expect(errData.args).toEqual([arg]);
   });
 
   test('should return 0 if the array is empty', () => {
@@ -73,6 +80,7 @@ describe('multiply', () => {
   test.each([
     [[1, 2, 3, 4], 24],
     [[-1, -2, -3, -4], 24],
+    [{ 0: -1, 1: -2, 2: -3, 3: -4, length: 4 }, 24],
     [[-1, 0, 4], -0],
     [[100, -20], -2000],
     [[Number.MAX_VALUE, -1, -1], Number.MAX_VALUE],
