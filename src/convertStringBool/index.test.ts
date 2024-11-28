@@ -42,4 +42,16 @@ describe('convertStringBool', () => {
   ])('convertStringBool(%s) should return boolean %s', (value, expected) => {
     expect(convertStringBool(value)).toBe(expected);
   });
+
+  test.each([
+    [true, true],
+    [false, false],
+    [new Boolean(true), true],
+    [new Boolean(false), false],
+  ])(
+    'convertStringBool(%s) should return %s boolean when value is already boolean type',
+    (value, expected) => {
+      expect(convertStringBool(value as unknown as string)).toBe(expected);
+    },
+  );
 });
