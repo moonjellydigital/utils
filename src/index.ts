@@ -3,6 +3,7 @@ export { clamp } from './number/clamp/index.js';
 export { compact } from './collection/compact/index.js';
 export { convertStringBool } from './convertStringBool/index.js';
 export { Deque } from './deque/index.js';
+export { difference } from './math/difference/index.js';
 export { drop } from './collection/drop/index.js';
 export { dropRight } from './collection/dropRight/index.js';
 export { dropRightWhile } from './collection/dropRightWhile/index.js';
