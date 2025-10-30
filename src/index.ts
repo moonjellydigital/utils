@@ -13,6 +13,7 @@ export { first } from './collection/first/index.js';
 export { isArrayLike } from './language/isArrayLike/index.js';
 export { isBigInt } from './language/isBigInt/index.js';
 export { isBoolean } from './language/isBoolean/index.js';
+export { isError } from './language/isError/index.js';
 export { isNonNullObject } from './language/isNonNullObject/index.js';
 export { isNullish } from './language/isNullish/index.js';
 export { isNullPrototype } from './language/isNullPrototype/index.js';

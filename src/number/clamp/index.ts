@@ -33,7 +33,7 @@ export const clamp = (n: number, lower: number, upper: number) => {
     Number.isNaN(lowerValue) ||
     Number.isNaN(upperValue)
   ) {
-    const msg = `Arguments n, lower, and upper must no be NaN. Args: n was ${n}, lower was ${lower}, upper was ${upper}`;
+    const msg = `Arguments n, lower, and upper must not be NaN. Args: n was ${n}, lower was ${lower}, upper was ${upper}`;
     const errData: ErrData = {
       code: 'NaN',
       prevErr: null,

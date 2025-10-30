@@ -6,8 +6,11 @@
 export const isError = (value: unknown): value is Error => {
   if (Error?.isError && Error.isError(value)) {
     return true;
-  } else if (typeof value === 'object' && value instanceof Error) {
+  }
+
+  if (typeof value === 'object' && value instanceof Error) {
     return true;
   }
+
   return false;
 };

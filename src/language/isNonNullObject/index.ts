@@ -7,5 +7,6 @@ export const isNonNullObject = (value: unknown): value is object => {
   if (typeof value === 'object' && value !== null) {
     return true;
   }
+
   return false;
 };

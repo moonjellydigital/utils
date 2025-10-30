@@ -7,5 +7,6 @@ export const isBoolean = (value: unknown): value is boolean | boolean => {
   if (typeof value === 'boolean' || value instanceof Boolean) {
     return true;
   }
+
   return false;
 };

@@ -5,7 +5,7 @@ import type { ErrData } from '../../types.d.ts';
  * Returns the last element of the array-like (arr.length - 1 index) if it exists.
  *
  * `last` returns an `Error` if the array-like is empty or the last index is an
- * empty slot in a sparse array. It only returns undefined if the value at at
+ * empty slot in a sparse array. It only returns undefined if the value at
  * the index is undefined, unlike simply doing `arr[arr.length - 1]`.
  * @param arr The array-like object or string primitive.
  * @returns The value at the last index in arr, or an Error.

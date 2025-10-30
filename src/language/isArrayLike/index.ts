@@ -15,5 +15,6 @@ export const isArrayLike = (value: unknown): value is ArrayLike<unknown> => {
   ) {
     return true;
   }
+
   return false;
 };

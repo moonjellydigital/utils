@@ -9,5 +9,6 @@ export const isNumber = (value: unknown): value is number | number => {
   if (typeof value === 'number' || value instanceof Number) {
     return true;
   }
+
   return false;
 };
