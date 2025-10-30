@@ -3,7 +3,7 @@
  * @param value The value to check.
  * @returns True if the value is array-like, false otherwise.
  */
-export const isArrayLike = (value: unknown): boolean => {
+export const isArrayLike = (value: unknown): value is ArrayLike<unknown> => {
   if (
     typeof value === 'string' ||
     (typeof value === 'object' &&

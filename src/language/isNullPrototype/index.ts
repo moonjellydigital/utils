@@ -3,7 +3,7 @@
  * @param value The value to check.
  * @returns True if the value is an object with a null prototype, false otherwise.
  */
-export const isNullPrototype = (value: unknown): boolean => {
+export const isNullPrototype = (value: unknown): value is object => {
   if (typeof value !== 'object' || value === null) {
     return false;
   }

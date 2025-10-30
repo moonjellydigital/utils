@@ -3,7 +3,7 @@
  * @param value The value to evaluate.
  * @returns True if value is null or undefined, false otherwise.
  */
-export const isNullish = (value: unknown): boolean => {
+export const isNullish = (value: unknown): value is null | undefined => {
   if (value === undefined || value === null) {
     return true;
   }

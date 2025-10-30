@@ -9,9 +9,9 @@ import type { ErrData } from '../types.d.ts';
  * @param value The string to convert.
  * @returns Boolean true or false, or an Error if value was not one of 'true' or 'false' strings.
  */
-export const convertStringBool = (value: string): boolean | Error => {
+export const convertStringBool = (value: unknown): boolean | Error => {
   if (isBoolean(value)) {
-    return value.valueOf() as unknown as boolean;
+    return value.valueOf();
   }
 
   if (!isString(value)) {
