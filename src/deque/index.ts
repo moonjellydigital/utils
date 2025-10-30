@@ -1,4 +1,5 @@
 import type { ErrData } from '../types.d.ts';
+import { isError } from '../language/isError/index.js';
 
 export class Deque<T> {
   #elements: T[];
@@ -116,7 +117,7 @@ export class Deque<T> {
       const errData: ErrData = {
         code: 'DeepCopyFailed',
         prevErr:
-          err instanceof Error ? err : (
+          isError(err) ? err : (
             new Error('structuredClone error', { cause: err })
           ),
         args: [],

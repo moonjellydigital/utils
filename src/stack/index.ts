@@ -1,4 +1,5 @@
 import type { ErrData } from '../types.d.ts';
+import { isError } from '../language/isError/index.js';
 
 export class Stack<T> {
   #elements: T[];
@@ -79,7 +80,7 @@ export class Stack<T> {
       const errData: ErrData = {
         code: 'DeepCopyFailed',
         prevErr:
-          err instanceof Error ? err : (
+          isError(err) ? err : (
             new Error('structuredClone error', { cause: err })
           ),
         args: [],

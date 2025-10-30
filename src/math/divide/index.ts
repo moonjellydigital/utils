@@ -1,6 +1,7 @@
 import { isNumber } from '../../language/isNumber/index.js';
 import { clamp } from '../../number/clamp/index.js';
 import type { ErrData } from '../../types.d.ts';
+import { isError } from '../../language/isError/index.js';
 
 /**
  * Divide one number by another.
@@ -49,7 +50,7 @@ export const divide = (dividend: number, divisor: number): number | Error => {
   const clampedA = clampValue(dividend);
   const clampedB = clampValue(divisor);
 
-  if (typeof clampedA === 'object' && clampedA instanceof Error) {
+  if (isError(clampedA)) {
     const msg = `An unknown error has occurred. This may be a bug in @moonjellydigital/utils.`;
     const errData: ErrData = {
       code: 'UnknownError',
@@ -59,7 +60,7 @@ export const divide = (dividend: number, divisor: number): number | Error => {
     return new Error(msg, { cause: errData });
   }
 
-  if (typeof clampedB === 'object' && clampedB instanceof Error) {
+  if (isError(clampedB)) {
     const msg = `An unknown error has occurred. This may be a bug in @moonjellydigital/utils.`;
     const errData: ErrData = {
       code: 'UnknownError',

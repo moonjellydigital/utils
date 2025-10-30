@@ -1,6 +1,7 @@
 import { isNumber } from '../../language/isNumber/index.js';
 import { clamp } from '../../number/clamp/index.js';
 import type { ErrData } from '../../types.d.ts';
+import { isError } from '../../language/isError/index.js';
 
 /**
  * Subtract one number from another.
@@ -42,7 +43,7 @@ export const difference = (
   const clampedA = clampValue(minuend);
   const clampedB = clampValue(subtrahend);
 
-  if (typeof clampedA === 'object' && clampedA instanceof Error) {
+  if (isError(clampedA)) {
     const msg = `An unknown error has occurred. This may be a bug in @moonjellydigital/utils.`;
     const errData: ErrData = {
       code: 'UnknownError',
@@ -52,7 +53,7 @@ export const difference = (
     return new Error(msg, { cause: errData });
   }
 
-  if (typeof clampedB === 'object' && clampedB instanceof Error) {
+  if (isError(clampedB)) {
     const msg = `An unknown error has occurred. This may be a bug in @moonjellydigital/utils.`;
     const errData: ErrData = {
       code: 'UnknownError',

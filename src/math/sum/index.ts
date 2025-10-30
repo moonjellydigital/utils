@@ -3,6 +3,7 @@ import { isNumber } from '../../language/isNumber/index.js';
 import { isString } from '../../language/isString/index.js';
 import { clamp } from '../../number/clamp/index.js';
 import type { ErrData } from '../../types.d.ts';
+import { isError } from '../../language/isError/index.js';
 
 /**
  * Sums an array-like of numbers.
@@ -71,10 +72,7 @@ export const sum = (numbers: ArrayLike<number>): number | Error => {
 
     const clampedTotal = clampTotal(total);
 
-    if (
-      typeof clampedTotal === 'object' &&
-      (clampedTotal as unknown) instanceof Error
-    ) {
+    if (isError(clampedTotal)) {
       const msg = `An unknown error has occurred. Execution stopped. This may be a bug in @moonjellydigital/utils.`;
       const errData: ErrData = {
         code: 'UnknownError',
