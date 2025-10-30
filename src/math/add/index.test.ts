@@ -1,13 +1,10 @@
 import { describe, test, expect } from 'vitest';
-import { multiply } from '.';
+import { add } from '.';
 import type { ErrData } from '../../types';
 
-describe('multiply', () => {
-  test('should return a TypeError if multiplier is not of number type', () => {
-    const result = multiply(
-      {} as unknown as number,
-      24,
-    ) as unknown as TypeError;
+describe('add', () => {
+  test('should return a TypeError if augend is not of number type', () => {
+    const result = add({} as unknown as number, 24) as unknown as TypeError;
     const errData = result.cause as unknown as ErrData;
     expect(result instanceof TypeError).toBe(true);
     expect(errData).toMatchObject({
@@ -17,11 +14,8 @@ describe('multiply', () => {
     });
   });
 
-  test('should return a TypeError if multiplicand is not of number type', () => {
-    const result = multiply(
-      24,
-      {} as unknown as number,
-    ) as unknown as TypeError;
+  test('should return a TypeError if addend is not of number type', () => {
+    const result = add(24, {} as unknown as number) as unknown as TypeError;
     const errData = result.cause as unknown as ErrData;
     expect(result instanceof TypeError).toBe(true);
     expect(errData).toMatchObject({
@@ -32,7 +26,7 @@ describe('multiply', () => {
   });
 
   test('should return a TypeError if both arguments are not of number type', () => {
-    const result = multiply(
+    const result = add(
       'string1' as unknown as number,
       'string2' as unknown as number,
     ) as unknown as TypeError;
@@ -45,8 +39,8 @@ describe('multiply', () => {
     });
   });
 
-  test('should return an Error if multiplier is NaN', () => {
-    const result = multiply(NaN, 12) as unknown as TypeError;
+  test('should return an Error if augend is NaN', () => {
+    const result = add(NaN, 12) as unknown as TypeError;
     const errData = result.cause as unknown as ErrData;
     expect(result instanceof Error).toBe(true);
     expect(errData).toMatchObject({
@@ -56,8 +50,8 @@ describe('multiply', () => {
     });
   });
 
-  test('should return an Error if multiplicand is NaN', () => {
-    const result = multiply(12, NaN) as unknown as TypeError;
+  test('should return an Error if addend is NaN', () => {
+    const result = add(12, NaN) as unknown as TypeError;
     const errData = result.cause as unknown as ErrData;
     expect(result instanceof Error).toBe(true);
     expect(errData).toMatchObject({
@@ -68,7 +62,7 @@ describe('multiply', () => {
   });
 
   test('should return an Error if both arguments are NaN', () => {
-    const result = multiply(NaN, NaN) as unknown as TypeError;
+    const result = add(NaN, NaN) as unknown as TypeError;
     const errData = result.cause as unknown as ErrData;
     expect(result instanceof Error).toBe(true);
     expect(errData).toMatchObject({
@@ -78,34 +72,31 @@ describe('multiply', () => {
     });
   });
 
-  test('should multiply Number objects', () => {
-    expect(multiply(Number(3), Number(4))).toBe(12);
+  test('should add Number objects', () => {
+    expect(add(Number(4), Number(2))).toBe(6);
   });
 
   test.each([
-    [10, 20, 200],
-    [20, 10, 200],
-    [-2, 4, -8],
-    [4, -2, -8],
-    [-8, -2, 16],
-    [8, 2, 16],
-  ])('multiply(%s, %s) to return %s', (multiplier, multiplicand, expected) => {
-    expect(multiply(multiplier, multiplicand)).toBe(expected);
+    [10, 20, 30],
+    [20, 10, 30],
+    [-2, 4, 2],
+    [4, -2, 2],
+    [-8, -12, -20],
+    [8, 12, 20],
+  ])('add(%s, %s) to return %s', (augend, addend, expected) => {
+    expect(add(augend, addend)).toBe(expected);
   });
 
   test.each([
-    [1.2, 3.6, 4.32],
-    [1.1, 2, 2.2],
-    [4.4, -2.2, -9.68],
-    [-2.2, 4.4, -9.68],
-    [-8.5, 3.5, -29.75],
-    [3.5, -8.5, -29.75],
-    [-0.4, -0.2, 0.08],
-    [0.4, 0.2, 0.08],
-  ])(
-    'multiply(%s, %s) to return approximately %s',
-    (multiplier, multiplicand, expected) => {
-      expect(multiply(multiplier, multiplicand)).toBeCloseTo(expected);
-    },
-  );
+    [1.2, 3.6, 4.8],
+    [1.1, 2, 3.1],
+    [4.4, -2.2, 2.2],
+    [-2.2, 4.4, 2.2],
+    [-8.5, 3.5, -5],
+    [3.5, -8.5, -5],
+    [-0.4, -0.2, -0.6],
+    [0.4, 0.2, 0.6],
+  ])('add(%s, %s) to return approximately %s', (augend, addend, expected) => {
+    expect(add(augend, addend)).toBeCloseTo(expected);
+  });
 });

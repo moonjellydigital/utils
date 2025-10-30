@@ -1,10 +1,10 @@
-import { difference } from '.';
+import { subtract } from '.';
 import { describe, test, expect } from 'vitest';
 import type { ErrData } from '../../types';
 
-describe('difference', () => {
+describe('subtract', () => {
   test('should return a TypeError if arg minuend is not of number type', () => {
-    const result = difference('2' as unknown as number, 4) as Error;
+    const result = subtract('2' as unknown as number, 4) as Error;
     const errData = result.cause as ErrData;
     expect(result).toBeInstanceOf(TypeError);
     expect(errData.code).toBe('WrongType');
@@ -13,7 +13,7 @@ describe('difference', () => {
   });
 
   test('should return a TypeError if arg subtrahend is not of number type', () => {
-    const result = difference(4, '2' as unknown as number) as Error;
+    const result = subtract(4, '2' as unknown as number) as Error;
     const errData = result.cause as ErrData;
     expect(result).toBeInstanceOf(TypeError);
     expect(errData.code).toBe('WrongType');
@@ -22,7 +22,7 @@ describe('difference', () => {
   });
 
   test('should return an Error if arg minuend is NaN', () => {
-    const result = difference(NaN, 3) as Error;
+    const result = subtract(NaN, 3) as Error;
     const errData = result.cause as ErrData;
     expect(result).toBeInstanceOf(RangeError);
     expect(errData.code).toBe('NaN');
@@ -31,7 +31,7 @@ describe('difference', () => {
   });
 
   test('should return an Error if arg subtrahend is NaN', () => {
-    const result = difference(3, NaN) as Error;
+    const result = subtract(3, NaN) as Error;
     const errData = result.cause as ErrData;
     expect(result).toBeInstanceOf(RangeError);
     expect(errData.code).toBe('NaN');
@@ -58,8 +58,8 @@ describe('difference', () => {
       new Number(10) as unknown as number,
       -2,
     ],
-  ])('difference(%s, %s) should equal %s', (a, b, expected) => {
-    expect(difference(a, b)).toBe(expected);
+  ])('subtract(%s, %s) should equal %s', (a, b, expected) => {
+    expect(subtract(a, b)).toBe(expected);
   });
 
   test.each([
@@ -68,9 +68,9 @@ describe('difference', () => {
     [Infinity, -Number.MAX_VALUE, Number.MAX_VALUE],
     [-Infinity, Number.MAX_VALUE, -Number.MAX_VALUE],
   ])(
-    'difference(%s, %s) should be clamped to -Number.MAX_VALUE to Number.MAX_VALUE, inclusive',
+    'subtract(%s, %s) should be clamped to -Number.MAX_VALUE to Number.MAX_VALUE, inclusive',
     (a, b, expected) => {
-      expect(difference(a, b)).toBe(expected);
+      expect(subtract(a, b)).toBe(expected);
     },
   );
 });

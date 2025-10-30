@@ -13,7 +13,11 @@ import { isNumber } from '../../language/isNumber/index.js';
  * @param upper The upper bound of the clamp range.
  * @returns The clamped number value.
  */
-export const clamp = (n: number, lower: number, upper: number) => {
+export const clamp = (
+  n: number,
+  lower: number,
+  upper: number,
+): number | Error => {
   if (!isNumber(n) || !isNumber(lower) || !isNumber(upper)) {
     const msg = `Arguments n, lower, and upper must be numbers. Args: n was ${n}, lower was ${lower}, upper was ${upper}`;
     const errData: ErrData = {

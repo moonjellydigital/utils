@@ -22,14 +22,31 @@ describe('mean', () => {
     },
   );
 
-  test('should return 0 if the array is empty', () => {
-    const result = mean([] as number[]);
-    expect(result).toBe(0);
+  test('should return an error with EmptyCollection code if the array is empty', () => {
+    const result = mean([] as number[]) as unknown as Error;
+    const errData = result.cause as unknown as ErrData;
+    expect(result).toBeInstanceOf(RangeError);
+    expect(errData).toMatchObject({
+      code: 'EmptyCollection',
+      prevErr: null,
+      args: [[]],
+    });
+  });
+
+  test('should return an error with EmptyCollection code if all elements are sparse', () => {
+    const result = mean([, , , ,] as unknown as number[]) as unknown as Error; // eslint-disable-line no-sparse-arrays
+    const errData = result.cause as unknown as ErrData;
+    expect(result).toBeInstanceOf(RangeError);
+    expect(errData).toMatchObject({
+      code: 'EmptyCollection',
+      prevErr: null,
+      args: [[, , , ,]], // eslint-disable-line no-sparse-arrays
+    });
   });
 
   test.each([
     [[1, 3, , 4, 4] as number[], 3], // eslint-disable-line no-sparse-arrays
-    [[, , , , ,] as unknown as number[], 0], // eslint-disable-line no-sparse-arrays
+    [[, , , 2, ,] as unknown as number[], 2], // eslint-disable-line no-sparse-arrays
   ])('should ignore sparse elements', (arg, expected) => {
     expect(mean(arg)).toBe(expected);
   });

@@ -13,7 +13,7 @@ import { isError } from '../../language/isError/index.js';
  * @param subtrahend The second number, which will be subtracted from the minuend.
  * @returns The result of the calculation `minuend - subtrahend`.
  */
-export const difference = (
+export const subtract = (
   minuend: number,
   subtrahend: number,
 ): number | Error => {

@@ -6,9 +6,10 @@ import type { ErrData } from '../../types.d.ts';
 import { isError } from '../../language/isError/index.js';
 
 /**
- * Sums an array-like of numbers.
+ * Sums an array-like of numbers as a sequence.
  *
- * `sum` returns 0 if the length of the array-like is 0, or all the elements are sparse.
+ * `sum` returns 0 (the addition identity) if the length of the array-like is 0, or all
+ * the elements are sparse.
  *
  * If the sum is equal to or greater than Number.MAX_VALUE the return value will
  * be clamped to Number.MAX_VALUE. If the sum is equal to or less than -Number.MAX_VALUE
@@ -18,7 +19,7 @@ import { isError } from '../../language/isError/index.js';
  * If `sum` reaches an array element that is NaN or a non-number type it will stop
  * execution and return an `Error`.
  *
- * `sum` can handle sparse arrays. Empty elements will be ignored.
+ * Empty elements in sparse arrays will be ignored.
  * @param numbers An array-like of numbers.
  * @returns The sum of the numbers in the array-like, or an Error.
  */
@@ -82,7 +83,7 @@ export const sum = (numbers: ArrayLike<number>): number | Error => {
       return new Error(msg, { cause: errData });
     }
 
-    total = clampedTotal as number;
+    total = clampedTotal;
   }
 
   return total;
