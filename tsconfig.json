@@ -1,6 +1,7 @@
 {
   "exclude": ["dist/**/*", "coverage/**/*", "eslint.config.js"],
   "compilerOptions": {
+    "types": ["bun", "node"],
     "lib": ["ESNext"],
     "target": "ESNext",
     "module": "ESNext",
