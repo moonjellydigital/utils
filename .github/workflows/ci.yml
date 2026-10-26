@@ -6,8 +6,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      # oven-sh/setup-bun v2.2.0
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
@@ -20,11 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['1.4.2', '1.4.1', '1.4.0', '1.3.14']
+        version: ['1.4.4', '1.4.3', '1.4.2', '1.4.1']
     name: Bun ${{ matrix.version }} tests
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      # oven-sh/setup-bun v2.2.0
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
         with:
           bun-version: ${{ matrix.version }}
       - run: bun install --frozen-lockfile
@@ -36,12 +40,15 @@ jobs:
         version: [22, 24, 26]
     name: Node ${{ matrix.version }} tests
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      # actions/setup-node v7.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: ${{ matrix.version }}
       - run: npm install -g yarn
-      - uses: actions/setup-node@v4
+      # actions/setup-node v7.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: ${{ matrix.version }}
           cache: yarn
@@ -54,8 +61,10 @@ jobs:
         version: ['2.x.x']
     name: Deno ${{ matrix.version }} tests
     steps:
-      - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v1
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      # denoland/setup-deno v2.0.5
+      - uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed
         with:
           deno-version: ${{ matrix.version }}
       - run: deno install --frozen=true --allow-scripts=npm:esbuild@0.21.5
